@@ -113,7 +113,7 @@ class NextTrackingNumberView(APIView):
         # Create a hash of the parameters to ensure uniqueness
         params_hash = hash((origin_country_id, destination_country_id, weight, created_at, customer_id, customer_name, customer_slug))
         tracking_number_prefix = str(params_hash)[:8]  # Take the first 8 characters of the hash
-
+        tracking_number_prefix = tracking_number_prefix.lstrip('-')  # Remove leading hyphens
         # Generate a random alphanumeric tracking number
         tracking_number_suffix = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
 
